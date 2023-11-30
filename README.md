@@ -14,5 +14,6 @@ $ go build -o my-cli main.go
 $ ./my-cli --help
 $ ./my-cli -m "kishor"
 $ ./my-cli -m "kishor" -i 
+$ ./my-cli -v  
 ```
 

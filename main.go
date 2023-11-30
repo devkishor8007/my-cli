@@ -17,6 +17,7 @@ var rootCmd = &cobra.Command{
 	Short: "simple cli with cobra",
 	Long: `Creating a simple CLI with Cobra and Golang
 	to explore and create something useful.`,
+	Version: "0.1.0",
 	Run: func(cmd *cobra.Command, args []string) {
 		if userName != "" && showUser {
 			fmt.Println("Username: " + userName)
