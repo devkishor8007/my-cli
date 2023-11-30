@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -25,7 +26,7 @@ var rootCmd = &cobra.Command{
 			fmt.Println("Please provide a valid username using the -m flag.")
 		}
 	},
-  }
+}
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&userName, "msg", "m", "", "please enter a valid userName")
