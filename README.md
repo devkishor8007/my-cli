@@ -15,5 +15,6 @@ $ ./my-cli --help
 $ ./my-cli -m "kishor"
 $ ./my-cli -m "kishor" -i 
 $ ./my-cli -v  
+$ ./my-cli echo working on echo 
 ```
 
