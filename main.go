@@ -41,8 +41,20 @@ var cmdEcho = &cobra.Command{
 	},
 }
 
+var uppercaseCmd = &cobra.Command{
+	Use:     "uppercase",
+	Short:   "Uppercase a string",
+	Aliases: []string{"upper"},
+	Args:    cobra.ExactArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		res := strings.ToUpper(args[0])
+		fmt.Println(res)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(cmdEcho)
+	rootCmd.AddCommand(uppercaseCmd)
 
 	rootCmd.PersistentFlags().StringVarP(&userName, "msg", "m", "", "please enter a valid userName")
 	rootCmd.PersistentFlags().BoolVarP(&showUser, "showUser", "i", false, "Display the userName if valid")
