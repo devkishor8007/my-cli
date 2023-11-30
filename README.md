@@ -11,11 +11,11 @@ $ go build -o my-cli main.go
 
 ## to execute the cli on terminal
 ```
-$ ./my-cli --help
-$ ./my-cli -m "kishor"
-$ ./my-cli -m "kishor" -i 
-$ ./my-cli -v  
-$ ./my-cli echo working on echo 
-$ ./mycli uppercase kishor
+$ ./my-cli --help // to get help
+$ ./my-cli -m "kishor" // insert username for greeting
+$ ./my-cli -m "kishor" -i // show username with a valid username through -i flag
+$ ./my-cli -v  // check the version
+$ ./my-cli echo working on echo // printing echo
+$ ./my-cli uppercase kishor // make the letters into uppercase
 ```
 
