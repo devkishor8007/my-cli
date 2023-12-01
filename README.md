@@ -17,5 +17,8 @@ $ ./my-cli -m "kishor" -i // show username with a valid username through -i flag
 $ ./my-cli -v  // check the version
 $ ./my-cli echo working on echo // printing echo
 $ ./my-cli uppercase kishor // make the letters into uppercase
+
+$ ./mycli notepad -n "text is here" -d // create a default file
+$ ./mycli notepad -n "text is here" -f "myfile.txt" // dynamic file
 ```
 

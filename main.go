@@ -10,10 +10,10 @@ import (
 )
 
 var (
-	userName string
-	showUser bool
-	fileName string
-	isDefaultFile bool 
+	userName       string
+	showUser       bool
+	fileName       string
+	isDefaultFile  bool
 	notepadContent string
 )
 
@@ -60,25 +60,26 @@ var notePadCmd = &cobra.Command{
 	Use:   "notepad",
 	Short: "Create a simple notepad",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(isDefaultFile)
-		if isDefaultFile && len(fileName) < 0 && notepadContent != "" {
+		switch {
+		case isDefaultFile && fileName == "":
 			createNotePad("default.txt", notepadContent)
-		} else if fileName != "" && notepadContent != "" {
+		case !isDefaultFile && fileName != "" && notepadContent != "":
 			createNotePad(fileName, notepadContent)
-		} else if notepadContent == "" &&  (len(fileName) > 0 && isDefaultFile) {
-			fmt.Println("Please provide a notepadContent using the -n flag.")
-		} else {
-			fmt.Println("Please provide a valid username using the -f flag.")
+		case notepadContent == "":
+			fmt.Println("Please provide notepad content using the -n flag")
+		default:
+			fmt.Println("Please provide a valid filename using the -f flag.")
 		}
 	},
 }
 
-func createNotePad(filename, content string) {
-	err := ioutil.WriteFile(fileName, []byte(content), 0777)
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
+func createNotePad(filename string, content string) {
+	nfilename := filename
+	err := ioutil.WriteFile(nfilename, []byte(content), 0777)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
 
 func init() {
@@ -89,9 +90,10 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&userName, "msg", "m", "", "please enter a valid userName")
 	rootCmd.PersistentFlags().BoolVarP(&showUser, "showUser", "i", false, "Display the userName if valid")
 
+	// notepad
+	rootCmd.PersistentFlags().BoolVarP(&isDefaultFile, "isDefaultFile", "d", false, "Use for default filename")
 	rootCmd.PersistentFlags().StringVarP(&fileName, "filename", "f", "", "Please enter a filename")
-    rootCmd.PersistentFlags().StringVarP(&notepadContent, "fileinput", "n", "", "Please enter the notepad content")
-	rootCmd.PersistentFlags().BoolVarP(&isDefaultFile, "isDefaultFile", "d", false, "Display the content")
+	rootCmd.PersistentFlags().StringVarP(&notepadContent, "fileinput", "n", "", "Please enter the notepad content")
 }
 
 func main() {
