@@ -18,7 +18,9 @@ $ ./my-cli -v  // check the version
 $ ./my-cli echo working on echo // printing echo
 $ ./my-cli uppercase kishor // make the letters into uppercase
 
-$ ./mycli notepad -n "text is here" -d // create a default file
-$ ./mycli notepad -n "text is here" -f "myfile.txt" // dynamic file 
+$ ./my-cli notepad -n "text is here" -d // create a default file
+$ ./my-cli notepad -n "text is here" -f "myfile.txt" // dynamic file 
+
+$ ./my-cli currentos // current directory of os and playing with some commands of linux
 ```
 
