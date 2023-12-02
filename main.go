@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
 	"io/ioutil"
+	"os"
+	"os/exec"
+	"runtime"
+	"strings"
 
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -73,6 +76,32 @@ var notePadCmd = &cobra.Command{
 	},
 }
 
+var currentOSCmd = &cobra.Command{
+	Use:   "currentos",
+	Short: "current os",
+	Run: func(cmd *cobra.Command, args []string) {
+		getValue := detectOs()
+		fmt.Println(getValue)
+		switch {
+		case getValue == "Windows":
+			mydir, _ := os.Getwd()
+			fmt.Print("current directory is ", mydir)
+		case getValue == "linux":
+			mydir := exec.Command("pwd")
+			fmt.Println("current directory is ", mydir)
+
+			myls := exec.Command("ls")
+			stdout, _ := myls.Output()
+			c := color.New(color.FgBlue)
+			fmt.Println(c.Sprint("list of content are\n", string(stdout)))
+		case getValue == "darwin":
+			fmt.Println("MAC OS")
+		default:
+			fmt.Println("")
+		}
+	},
+}
+
 func createNotePad(filename string, content string) {
 	nfilename := filename
 	err := ioutil.WriteFile(nfilename, []byte(content), 0777)
@@ -82,10 +111,16 @@ func createNotePad(filename string, content string) {
 	}
 }
 
+func detectOs() string {
+	osName := runtime.GOOS
+	return osName
+}
+
 func init() {
 	rootCmd.AddCommand(cmdEcho)
 	rootCmd.AddCommand(uppercaseCmd)
 	rootCmd.AddCommand(notePadCmd)
+	rootCmd.AddCommand(currentOSCmd)
 
 	rootCmd.PersistentFlags().StringVarP(&userName, "msg", "m", "", "please enter a valid userName")
 	rootCmd.PersistentFlags().BoolVarP(&showUser, "showUser", "i", false, "Display the userName if valid")
